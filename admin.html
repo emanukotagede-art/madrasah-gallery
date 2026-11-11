@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin: Dokumentasi MA Nurul Ummah</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <main>
+    <p class="label">Pengelola</p>
+    <h1>Admin Dokumentasi</h1>
+
+    <section id="view-loading">
+      <p>Memuat…</p>
+    </section>
+
+    <section id="view-login" hidden>
+      <h2>Masuk</h2>
+      <form id="form-login" autocomplete="on">
+        <label for="login-username">Username</label>
+        <input id="login-username" name="username" type="text" autocomplete="username"
+               autocapitalize="none" spellcheck="false" required maxlength="30">
+
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password"
+               autocomplete="current-password" required maxlength="100">
+
+        <p id="msg-login" class="msg" role="alert"></p>
+        <button type="submit" id="btn-login">Masuk</button>
+      </form>
+    </section>
+
+    <section id="view-change" hidden>
+      <h2>Ganti password</h2>
+      <p id="change-info"></p>
+      <form id="form-change">
+        <label for="change-old">Password lama</label>
+        <input id="change-old" type="password" autocomplete="current-password" required maxlength="100">
+
+        <label for="change-new">Password baru</label>
+        <input id="change-new" type="password" autocomplete="new-password" required maxlength="100">
+        <small>Minimal 8 karakter, mengandung huruf dan angka, dan tidak memuat username.</small>
+
+        <label for="change-new2">Ulangi password baru</label>
+        <input id="change-new2" type="password" autocomplete="new-password" required maxlength="100">
+
+        <p id="msg-change" class="msg" role="alert"></p>
+        <button type="submit" id="btn-change">Simpan password baru</button>
+        <button type="button" id="btn-change-cancel" class="secondary">Batal</button>
+      </form>
+    </section>
+
+    <section id="view-dashboard" hidden>
+      <p>Masuk sebagai <strong id="who-name"></strong> (<span id="who-role"></span>)</p>
+      <p>
+        <button type="button" id="btn-open-change" class="secondary">Ganti password</button>
+        <button type="button" id="btn-logout" class="secondary">Keluar</button>
+      </p>
+      <hr>
+      <p>Fitur upload dan pengelolaan dokumentasi menyusul di tahap berikutnya.</p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
