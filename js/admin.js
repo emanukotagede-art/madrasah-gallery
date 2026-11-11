@@ -145,5 +145,9 @@
     if (t) await apiPost('logout', { token: t });
   });
 
+    Uploader.init({
+    onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
+  });
+
   boot();
 })();
