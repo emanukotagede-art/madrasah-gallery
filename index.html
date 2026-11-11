@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galeri MA Nurul Ummah</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <p class="label">Tes koneksi</p>
+    <h1>Galeri MA Nurul Ummah</h1>
+    <p id="status">Menghubungi server…</p>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+    (async function () {
+      const el = document.getElementById('status');
+      if (API_URL.indexOf('PASTE') >= 0) {
+        el.textContent = 'URL API belum diisi di js/config.js';
+        return;
+      }
+      try {
+        const res = await fetch(API_URL + '?action=meta');
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Respons tidak valid');
+        el.textContent = 'Terhubung ke server. Jumlah kategori: ' + data.categories.length;
+      } catch (err) {
+        el.textContent = 'Gagal terhubung: ' + err.message;
+      }
+    })();
+  </script>
+</body>
+</html>
