@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/upload.css">
+  <link rel="stylesheet" href="css/manage.css">
 </head>
 <body>
   <main>
@@ -85,12 +86,62 @@
 
       <p id="msg-upload" class="msg" role="status"></p>
       <button type="button" id="btn-upload">Unggah semua foto</button>
+
+      <hr>
+
+      <h2>Daftar galeri</h2>
+      <p id="mg-note"></p>
+      <div id="mg-filters" class="mg-top-bar"></div>
+      <form id="form-search">
+        <input id="mg-q" type="search" placeholder="Cari judul, caption, atau kegiatan" maxlength="100">
+        <button type="submit">Cari</button>
+      </form>
+      <p id="mg-msg" class="msg" role="status"></p>
+      <div id="mg-list"></div>
+      <div class="mg-pager">
+        <button type="button" id="mg-prev" class="secondary">Sebelumnya</button>
+        <span id="mg-page-info"></span>
+        <button type="button" id="mg-next" class="secondary">Berikutnya</button>
+      </div>
     </section>
   </main>
+
+  <dialog id="dlg-view">
+    <h3 id="dlg-view-title"></h3>
+    <p id="dlg-view-status"></p>
+    <img id="dlg-view-img" alt="">
+    <p><button type="button" id="btn-view-close" class="secondary">Tutup</button></p>
+  </dialog>
+
+  <dialog id="dlg-edit">
+    <h3>Edit galeri</h3>
+    <form id="form-edit">
+      <label for="ed-title">Judul</label>
+      <input id="ed-title" type="text" maxlength="150" required>
+
+      <label for="ed-desc">Caption</label>
+      <textarea id="ed-desc" rows="5" maxlength="2000" required></textarea>
+
+      <label for="ed-category">Kategori</label>
+      <select id="ed-category"></select>
+
+      <label for="ed-event">Nama kegiatan</label>
+      <input id="ed-event" type="text" list="ed-events" maxlength="120" autocomplete="off" required>
+      <datalist id="ed-events"></datalist>
+
+      <label for="ed-date">Tanggal kegiatan</label>
+      <input id="ed-date" type="date" required>
+
+      <p id="msg-edit" class="msg" role="alert"></p>
+      <button type="submit" id="btn-edit-save">Simpan</button>
+      <button type="button" id="btn-edit-cancel" class="secondary">Batal</button>
+    </form>
+  </dialog>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/upload.js"></script>
+  <script src="js/manage.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
