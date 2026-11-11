@@ -1,0 +1,35 @@
+h2 { margin: 24px 0 12px; font-size: 22px; }
+
+form { max-width: 420px; }
+
+label { display: block; margin: 16px 0 4px; font-weight: 600; }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+small { display: block; margin-top: 4px; color: #666; }
+
+button {
+  margin: 16px 8px 0 0;
+  padding: 10px 18px;
+  border: 1px solid var(--teks);
+  background: var(--teks);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.secondary { background: transparent; color: var(--teks); }
+
+button:disabled { opacity: 0.5; cursor: wait; }
+
+.msg { min-height: 1.5em; margin: 12px 0 0; color: #b00020; }
+
+[hidden] { display: none !important; }
