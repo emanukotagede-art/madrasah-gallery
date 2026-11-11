@@ -277,6 +277,7 @@ const Uploader = (function () {
     uploading = false;
     window.removeEventListener('beforeunload', warnLeave);
     refreshLocks();
+    if (okCount && opts.onUploaded) opts.onUploaded();
 
     if (authLost) {
       if (opts.onAuthError) opts.onAuthError();
