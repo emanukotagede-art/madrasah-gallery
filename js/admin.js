@@ -1,8 +1,9 @@
-// Logika halaman admin: login, ganti password, logout.
+// Logika halaman admin: login, ganti password, logout, dan penghubung modul lain.
 (function () {
   const $ = function (id) { return document.getElementById(id); };
   const VIEWS = ['view-loading', 'view-login', 'view-change', 'view-dashboard'];
   let me = null; // { name, role, username, mustChange }
+  let dashLoaded = false;
 
   function show(view) {
     VIEWS.forEach(function (v) { $(v).hidden = (v !== view); });
@@ -21,11 +22,21 @@
     };
   }
 
+  // Bersihkan data di layar saat keluar atau sesi habis
+  function leaveDashboard() {
+    if (dashLoaded) {
+      Manager.stop();
+      dashLoaded = false;
+    }
+  }
+
   // Tentukan layar yang tampil sesuai keadaan login
   function route() {
     if (!me) {
+      leaveDashboard();
       show('view-login');
     } else if (me.mustChange) {
+      leaveDashboard();
       $('change-info').textContent = 'Demi keamanan, Anda wajib mengganti password sementara sebelum melanjutkan.';
       $('btn-change-cancel').hidden = true;
       show('view-change');
@@ -33,6 +44,10 @@
       $('who-name').textContent = me.name;
       $('who-role').textContent = me.role;
       show('view-dashboard');
+      if (!dashLoaded) {
+        dashLoaded = true;
+        Manager.start(me.role);
+      }
     }
   }
 
@@ -145,8 +160,13 @@
     if (t) await apiPost('logout', { token: t });
   });
 
-    Uploader.init({
+  Manager.init({
     onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
+  });
+
+  Uploader.init({
+    onAuthError: function () { handleAuthError({ code: 'AUTH' }); },
+    onUploaded: function () { Manager.reload(); }
   });
 
   boot();
