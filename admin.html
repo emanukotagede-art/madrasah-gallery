@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Admin: Dokumentasi MA Nurul Ummah</title>
+  <title>Admin: Galeri MA Nurul Ummah</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/upload.css">
 </head>
 <body>
   <main>
     <p class="label">Pengelola</p>
-    <h1>Admin Dokumentasi</h1>
+    <h1>Admin Galeri</h1>
 
     <section id="view-loading">
       <p>Memuat…</p>
@@ -60,12 +61,36 @@
         <button type="button" id="btn-logout" class="secondary">Keluar</button>
       </p>
       <hr>
-      <p>Fitur upload dan pengelolaan dokumentasi menyusul di tahap berikutnya.</p>
+
+      <h2>Unggah foto</h2>
+      <div class="up-shared">
+        <label for="up-category">Kategori</label>
+        <select id="up-category">
+          <option value="">— Pilih kategori —</option>
+        </select>
+
+        <label for="up-event">Nama kegiatan</label>
+        <input id="up-event" type="text" list="up-events" maxlength="120" autocomplete="off">
+        <datalist id="up-events"></datalist>
+        <small>Ketik nama baru, atau pilih nama yang pernah dipakai agar penulisannya seragam.</small>
+
+        <label for="up-date">Tanggal kegiatan</label>
+        <input id="up-date" type="date">
+
+        <label for="up-files">Foto (bisa pilih beberapa sekaligus, maksimal 20)</label>
+        <input id="up-files" type="file" accept="image/*" multiple>
+      </div>
+
+      <div id="up-list"></div>
+
+      <p id="msg-upload" class="msg" role="status"></p>
+      <button type="button" id="btn-upload">Unggah semua foto</button>
     </section>
   </main>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/upload.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
