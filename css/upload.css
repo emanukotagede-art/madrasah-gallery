@@ -1,0 +1,34 @@
+.up-shared { max-width: 420px; }
+
+#up-list { margin: 24px 0 0; }
+
+.up-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-top: 1px solid #ddd;
+}
+
+.up-row.done { opacity: 0.65; }
+
+.up-prev {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.up-fields label { margin-top: 0; margin-bottom: 8px; }
+
+.up-status { margin: 4px 0 0; font-size: 14px; color: #666; word-break: break-word; }
+.up-status.ok { color: #1b6e2d; }
+.up-status.err { color: #b00020; }
+
+.msg.ok { color: #1b6e2d; }
+
+@media (max-width: 560px) {
+  .up-row { grid-template-columns: 1fr; }
+  .up-prev { width: 100%; height: 180px; }
+}
