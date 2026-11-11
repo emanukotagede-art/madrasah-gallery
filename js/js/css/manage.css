@@ -1,0 +1,58 @@
+.mg-top-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0; }
+
+.mg-filter {
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--teks);
+  background: transparent;
+  color: var(--teks);
+  font-size: 14px;
+}
+.mg-filter.active { background: var(--teks); color: #fff; }
+
+#form-search { display: flex; gap: 8px; max-width: 420px; margin-bottom: 8px; }
+#form-search input { flex: 1; }
+#form-search button { margin: 0; }
+
+.mg-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid #ddd;
+}
+.mg-thumb { width: 140px; height: 105px; object-fit: cover; background: #e8e4de; }
+.mg-body h3 { margin: 4px 0; font-size: 18px; }
+.mg-top { margin: 0; font-size: 13px; }
+.mg-id { margin-left: 8px; color: #777; font-family: ui-monospace, Consolas, monospace; }
+.mg-meta { margin: 2px 0; font-size: 14px; color: #555; }
+.mg-desc { margin: 8px 0; font-size: 14px; white-space: pre-line; }
+.mg-actions button { margin: 4px 6px 0 0; padding: 6px 12px; font-size: 14px; }
+.mg-empty { padding: 16px 0; color: #666; }
+
+button.danger { background: transparent; color: #b00020; border-color: #b00020; }
+
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid #999;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge.s-Published { color: #1b6e2d; border-color: #1b6e2d; }
+.badge.s-Review { color: #9a4a1f; border-color: #9a4a1f; }
+.badge.s-Draft { color: #555; }
+.badge.s-Archived { color: #999; border-color: #bbb; }
+
+.mg-pager { display: flex; gap: 8px; align-items: center; margin-top: 16px; }
+.mg-pager button { margin: 0; }
+
+dialog { max-width: min(640px, 92vw); border: 1px solid #bbb; padding: 20px; background: var(--latar); color: var(--teks); }
+dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+#dlg-view-img { display: block; max-width: 100%; max-height: 70vh; margin: 8px auto; }
+#dlg-edit form { max-width: none; }
+
+@media (max-width: 560px) {
+  .mg-item { grid-template-columns: 1fr; }
+  .mg-thumb { width: 100%; height: 200px; }
+}
