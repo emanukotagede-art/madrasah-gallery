@@ -5,31 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Galeri MA Nurul Ummah</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/gallery.css">
 </head>
 <body>
   <main>
-    <p class="label">Tes koneksi</p>
+    <p class="label">Arsip Galeri</p>
     <h1>Galeri MA Nurul Ummah</h1>
-    <p id="status">Menghubungi server…</p>
+
+    <form id="g-form" class="g-filters">
+      <input id="g-q" type="search" placeholder="Cari judul, caption, atau kegiatan" maxlength="100">
+      <select id="g-category" aria-label="Kategori"><option value="">Semua kategori</option></select>
+      <select id="g-year" aria-label="Tahun"><option value="">Semua tahun</option></select>
+      <select id="g-event" aria-label="Kegiatan"><option value="">Semua kegiatan</option></select>
+      <button type="submit">Cari</button>
+      <button type="button" id="g-reset" class="secondary">Reset</button>
+    </form>
+
+    <p id="g-status" role="status"></p>
+    <div id="g-grid" class="g-grid"></div>
+    <p><button type="button" id="g-more" hidden>Muat lebih banyak</button></p>
   </main>
 
+  <dialog id="g-box">
+    <img id="g-box-img" alt="">
+    <h2 id="g-box-title"></h2>
+    <p id="g-box-meta"></p>
+    <p id="g-box-desc"></p>
+    <div class="g-box-nav">
+      <button type="button" id="g-box-prev">‹ Sebelumnya</button>
+      <button type="button" id="g-box-next">Berikutnya ›</button>
+      <button type="button" id="g-box-close">Tutup</button>
+    </div>
+  </dialog>
+
   <script src="js/config.js"></script>
-  <script>
-    (async function () {
-      const el = document.getElementById('status');
-      if (API_URL.indexOf('PASTE') >= 0) {
-        el.textContent = 'URL API belum diisi di js/config.js';
-        return;
-      }
-      try {
-        const res = await fetch(API_URL + '?action=meta');
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.error || 'Respons tidak valid');
-        el.textContent = 'Terhubung ke server. Jumlah kategori: ' + data.categories.length;
-      } catch (err) {
-        el.textContent = 'Gagal terhubung: ' + err.message;
-      }
-    })();
-  </script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/gallery.js"></script>
 </body>
 </html>
