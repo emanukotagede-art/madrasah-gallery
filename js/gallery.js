@@ -202,6 +202,11 @@
   $('g-more').addEventListener('click', function () {
     if (!loading && hasMore) load(false);
   });
+  $('g-box-detail').addEventListener('click', function () {
+    if (current >= 0 && items[current]) {
+      location.href = 'foto.html?id=' + encodeURIComponent(items[current].id);
+  }
+  });
   $('g-box-close').addEventListener('click', closeBox);
   $('g-box-prev').addEventListener('click', function () { openBox(current - 1); });
   $('g-box-next').addEventListener('click', function () { openBox(current + 1); });
