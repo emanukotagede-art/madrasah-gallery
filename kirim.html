@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kirim Dokumentasi: MA Nurul Ummah</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/upload.css">
+  <link rel="stylesheet" href="css/manage.css">
+</head>
+<body>
+  <main>
+    <p class="label">Petugas</p>
+    <h1>Kirim Dokumentasi</h1>
+
+    <section id="view-loading">
+      <p>Memuat…</p>
+    </section>
+
+    <section id="view-login" hidden>
+      <h2>Masuk</h2>
+      <form id="form-login" autocomplete="on">
+        <label for="login-username">Username</label>
+        <input id="login-username" name="username" type="text" autocomplete="username"
+               autocapitalize="none" spellcheck="false" required maxlength="30">
+
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password"
+               autocomplete="current-password" required maxlength="100">
+
+        <p id="msg-login" class="msg" role="alert"></p>
+        <button type="submit" id="btn-login">Masuk</button>
+      </form>
+    </section>
+
+    <section id="view-change" hidden>
+      <h2>Ganti password</h2>
+      <p id="change-info"></p>
+      <form id="form-change">
+        <label for="change-old">Password lama</label>
+        <input id="change-old" type="password" autocomplete="current-password" required maxlength="100">
+
+        <label for="change-new">Password baru</label>
+        <input id="change-new" type="password" autocomplete="new-password" required maxlength="100">
+        <small>Minimal 8 karakter, mengandung huruf dan angka, dan tidak memuat username.</small>
+
+        <label for="change-new2">Ulangi password baru</label>
+        <input id="change-new2" type="password" autocomplete="new-password" required maxlength="100">
+
+        <p id="msg-change" class="msg" role="alert"></p>
+        <button type="submit" id="btn-change">Simpan password baru</button>
+        <button type="button" id="btn-change-cancel" class="secondary">Batal</button>
+      </form>
+    </section>
+
+    <section id="view-dashboard" hidden>
+      <p>Masuk sebagai <strong id="who-name"></strong> (<span id="who-role"></span>)</p>
+      <p>
+        <button type="button" id="btn-open-change" class="secondary">Ganti password</button>
+        <button type="button" id="btn-logout" class="secondary">Keluar</button>
+      </p>
+      <hr>
+
+      <h2>Kirim foto kegiatan</h2>
+      <p>Foto yang Anda kirim berstatus <strong>Review</strong> dan baru tampil di website setelah diperiksa dan dipublikasikan oleh admin.</p>
+      <div class="up-shared">
+        <label for="up-category">Kategori</label>
+        <select id="up-category">
+          <option value="">— Pilih kategori —</option>
+        </select>
+
+        <label for="up-event">Nama kegiatan</label>
+        <input id="up-event" type="text" list="up-events" maxlength="120" autocomplete="off">
+        <datalist id="up-events"></datalist>
+        <small>Ketik nama baru, atau pilih nama yang pernah dipakai agar penulisannya seragam.</small>
+
+        <label for="up-date">Tanggal kegiatan</label>
+        <input id="up-date" type="date">
+
+        <label for="up-files">Foto (bisa pilih beberapa sekaligus, maksimal 20)</label>
+        <input id="up-files" type="file" accept="image/*" multiple>
+      </div>
+
+      <div id="up-list"></div>
+
+      <p id="msg-upload" class="msg" role="status"></p>
+      <button type="button" id="btn-upload">Unggah semua foto</button>
+
+      <hr>
+
+      <h2>Kiriman saya</h2>
+      <p id="mg-note"></p>
+      <div id="mg-filters" class="mg-top-bar"></div>
+      <form id="form-search">
+        <input id="mg-q" type="search" placeholder="Cari judul, caption, atau kegiatan" maxlength="100">
+        <button type="submit">Cari</button>
+      </form>
+      <p id="mg-msg" class="msg" role="status"></p>
+      <div id="mg-list"></div>
+      <div class="mg-pager">
+        <button type="button" id="mg-prev" class="secondary">Sebelumnya</button>
+        <span id="mg-page-info"></span>
+        <button type="button" id="mg-next" class="secondary">Berikutnya</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dlg-view">
+    <h3 id="dlg-view-title"></h3>
+    <p id="dlg-view-status"></p>
+    <img id="dlg-view-img" alt="">
+    <p><button type="button" id="btn-view-close" class="secondary">Tutup</button></p>
+  </dialog>
+
+  <!-- Jendela edit dibutuhkan oleh mesin daftar; Petugas tidak pernah melihat tombol Edit -->
+  <dialog id="dlg-edit">
+    <h3>Edit dokumentasi</h3>
+    <form id="form-edit">
+      <label for="ed-title">Judul</label>
+      <input id="ed-title" type="text" maxlength="150" required>
+
+      <label for="ed-desc">Caption</label>
+      <textarea id="ed-desc" rows="5" maxlength="2000" required></textarea>
+
+      <label for="ed-category">Kategori</label>
+      <select id="ed-category"></select>
+
+      <label for="ed-event">Nama kegiatan</label>
+      <input id="ed-event" type="text" list="ed-events" maxlength="120" autocomplete="off" required>
+      <datalist id="ed-events"></datalist>
+
+      <label for="ed-date">Tanggal kegiatan</label>
+      <input id="ed-date" type="date" required>
+
+      <p id="msg-edit" class="msg" role="alert"></p>
+      <button type="submit" id="btn-edit-save">Simpan</button>
+      <button type="button" id="btn-edit-cancel" class="secondary">Batal</button>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/upload.js"></script>
+  <script src="js/manage.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
