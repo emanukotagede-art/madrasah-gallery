@@ -26,7 +26,7 @@
   function leaveDashboard() {
     if (dashLoaded) {
       Manager.stop();
-      People.stop();
+            if (typeof People !== 'undefined') People.stop();
       dashLoaded = false;
     }
   }
@@ -48,7 +48,7 @@
       if (!dashLoaded) {
         dashLoaded = true;
         Manager.start(me.role);
-        People.start(me.role, me.username);
+                if (typeof People !== 'undefined') People.start(me.role, me.username);
       }
     }
   }
@@ -162,9 +162,11 @@
     if (t) await apiPost('logout', { token: t });
   });
 
-  People.init({
-    onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
-  });
+    if (typeof People !== 'undefined') {
+    People.init({
+      onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
+    });
+  }
   
   Manager.init({
     onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
