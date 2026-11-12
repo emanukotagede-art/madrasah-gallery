@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/upload.css">
   <link rel="stylesheet" href="css/manage.css">
+  <link rel="stylesheet" href="css/people.css">
 </head>
 <body>
   <main>
@@ -101,7 +102,87 @@
       <div class="mg-pager">
         <button type="button" id="mg-prev" class="secondary">Sebelumnya</button>
         <span id="mg-page-info"></span>
-        <button type="button" id="mg-next" class="secondary">Berikutnya</button>
+                <button type="button" id="mg-next" class="secondary">Berikutnya</button>
+      </div>
+
+      <div id="view-admin-tools" hidden>
+        <hr>
+        <h2>Kelola kategori</h2>
+        <p id="pp-cat-msg" class="msg" role="status"></p>
+        <div id="pp-cat-list"></div>
+        <p><button type="button" id="pp-cat-add">Tambah kategori</button></p>
+
+        <hr>
+        <h2>Kelola pengguna</h2>
+        <p id="pp-user-msg" class="msg" role="status"></p>
+        <div id="pp-user-list"></div>
+        <p><button type="button" id="pp-user-add">Tambah pengguna</button></p>
+
+        <dialog id="dlg-cat">
+          <h3 id="cat-dlg-title"></h3>
+          <form id="form-cat">
+            <label for="cat-name">Nama kategori</label>
+            <input id="cat-name" type="text" maxlength="60" required>
+
+            <label for="cat-desc">Deskripsi (opsional)</label>
+            <input id="cat-desc" type="text" maxlength="200">
+
+            <label for="cat-status">Status</label>
+            <select id="cat-status">
+              <option value="Active">Aktif (muncul di pilihan)</option>
+              <option value="Inactive">Nonaktif (disembunyikan dari pilihan)</option>
+            </select>
+            <small>Kategori tidak dihapus, hanya dinonaktifkan, agar foto lama tetap punya kategori.</small>
+
+            <p id="msg-cat" class="msg" role="alert"></p>
+            <button type="submit" id="btn-cat-save">Simpan</button>
+            <button type="button" id="btn-cat-cancel" class="secondary">Batal</button>
+          </form>
+        </dialog>
+
+        <dialog id="dlg-user">
+          <h3 id="user-dlg-title"></h3>
+          <form id="form-user">
+            <label for="usr-username">Username</label>
+            <input id="usr-username" type="text" maxlength="30" autocomplete="off"
+                   autocapitalize="none" spellcheck="false">
+            <small id="usr-username-hint">3 sampai 30 karakter, diawali huruf; hanya huruf kecil, angka, titik, garis bawah, dan strip. Tidak dapat diubah setelah dibuat.</small>
+
+            <label for="usr-name">Nama lengkap</label>
+            <input id="usr-name" type="text" maxlength="60" required>
+
+            <label for="usr-role">Peran</label>
+            <select id="usr-role">
+              <option value="Petugas">Petugas (hanya mengirim dokumentasi)</option>
+              <option value="Admin">Admin (mengelola semuanya)</option>
+            </select>
+
+            <div id="usr-status-box">
+              <label for="usr-status">Status</label>
+              <select id="usr-status">
+                <option value="Active">Aktif</option>
+                <option value="Inactive">Nonaktif (tidak bisa login)</option>
+              </select>
+            </div>
+
+            <p id="msg-user" class="msg" role="alert"></p>
+            <button type="submit" id="btn-user-save">Simpan</button>
+            <button type="button" id="btn-user-cancel" class="secondary">Batal</button>
+          </form>
+        </dialog>
+
+        <dialog id="dlg-secret">
+          <h3 id="secret-title"></h3>
+          <p>Username: <strong id="secret-username"></strong></p>
+          <label for="secret-pw">Password sementara</label>
+          <input id="secret-pw" type="text" readonly>
+          <p>
+            <button type="button" id="btn-secret-copy">Salin</button>
+            <span id="secret-copy-msg"></span>
+          </p>
+          <p>Password ini <strong>hanya tampil sekali</strong>. Sampaikan lewat jalur pribadi (jangan ditempel di grup). Pengguna wajib menggantinya saat login pertama. Jika terlewat, lakukan reset password lagi.</p>
+          <p><button type="button" id="btn-secret-close" class="secondary">Saya sudah mencatatnya, tutup</button></p>
+        </dialog>
       </div>
     </section>
   </main>
