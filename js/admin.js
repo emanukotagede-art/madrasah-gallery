@@ -26,6 +26,7 @@
   function leaveDashboard() {
     if (dashLoaded) {
       Manager.stop();
+      People.stop();
       dashLoaded = false;
     }
   }
@@ -47,6 +48,7 @@
       if (!dashLoaded) {
         dashLoaded = true;
         Manager.start(me.role);
+        People.start(me.role, me.username);
       }
     }
   }
@@ -160,6 +162,10 @@
     if (t) await apiPost('logout', { token: t });
   });
 
+  People.init({
+    onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
+  });
+  
   Manager.init({
     onAuthError: function () { handleAuthError({ code: 'AUTH' }); }
   });
