@@ -1,0 +1,21 @@
+.pp-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #ddd;
+}
+.pp-info { flex: 1 1 260px; }
+.pp-name { margin: 0; }
+.pp-actions button { margin: 4px 6px 0 0; padding: 6px 12px; font-size: 14px; }
+
+.badge.s-Active { color: #1b6e2d; border-color: #1b6e2d; }
+.badge.s-Inactive { color: #999; border-color: #bbb; }
+
+#secret-pw {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+}
