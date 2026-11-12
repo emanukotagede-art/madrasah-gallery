@@ -70,7 +70,6 @@
     img.loading = 'lazy';
     img.decoding = 'async';
     img.referrerPolicy = 'no-referrer';
-    if (it.width && it.height) img.style.aspectRatio = it.width + ' / ' + it.height;
     img.src = thumbUrl(it.thumbId);
 
     const h = document.createElement('h3');
