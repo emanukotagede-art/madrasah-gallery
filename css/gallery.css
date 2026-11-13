@@ -1,18 +1,12 @@
 [hidden] { display: none !important; }
 
-/* ---------- Halaman (khusus tampilan HP) ---------- */
-@media (max-width: 599px) {
-  main { padding: 32px 16px; }
-  h1 { font-size: 28px; }
-}
-
 /* ---------- Filter ---------- */
 /* HP: 2 kolom */
 .g-filters {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin: 24px 0 8px;
+  margin: 32px 0 16px;
 }
 
 .g-filters input,
@@ -24,10 +18,10 @@
   height: 44px;
   margin: 0;
   padding: 0 12px;
-  border: 1px solid #bbb;
+  border: 1px solid var(--color-ink-faint);
   border-radius: 0;
-  background: #fff;
-  color: inherit;
+  background: transparent;
+  color: var(--color-ink);
   font: inherit;
   font-size: 16px; /* 16px mencegah iPhone memperbesar layar saat mengetik */
 }
@@ -36,12 +30,13 @@
   -webkit-appearance: none;
   appearance: none;
 }
+.g-filters input::placeholder { color: var(--color-ink-soft); opacity: 1; }
 
 .g-filters select {
   padding-right: 36px;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231F1A17' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231f1c19' stroke-width='1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   white-space: nowrap;
@@ -50,19 +45,33 @@
   cursor: pointer;
 }
 
+.g-filters input:focus,
+.g-filters select:focus { border-color: var(--color-ink); }
+
+/* tombol: gaya sama dengan tombol manu.sch.id */
 .g-filters button {
-  border-color: var(--teks);
-  background: var(--teks);
-  color: #fff;
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background-color .15s ease-out, border-color .15s ease-out, color .15s ease-out;
 }
-.g-filters button.secondary { background: transparent; color: var(--teks); }
+.g-filters button.secondary { background: transparent; color: var(--color-ink); }
+
+@media (hover: hover) {
+  .g-filters button:hover { border-color: var(--color-accent); background: var(--color-accent); }
+  .g-filters button.secondary:hover { background: transparent; color: var(--color-accent); }
+}
 
 /* HP: pencarian dan kategori memenuhi satu baris; sisanya berdua-dua */
 .g-filters input[type="search"],
 #g-category { grid-column: 1 / -1; }
 
-/* Tablet: 6 kolom bantu -> pencarian penuh, 3 dropdown sama lebar, 2 tombol sama lebar */
+/* Tablet: pencarian penuh, 3 dropdown sama lebar, 2 tombol sama lebar */
 @media (min-width: 600px) {
   .g-filters { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .g-filters input[type="search"] { grid-column: span 6; }
@@ -81,20 +90,31 @@
   .g-filters button { width: auto; padding: 0 24px; }
 }
 
-#g-status { margin: 8px 0 16px; color: #666; }
+/* ---------- Status jumlah ---------- */
+#g-status {
+  min-height: 1.5em;
+  margin: 0 0 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 /* ---------- Grid foto ---------- */
 /* HP: 2 kolom */
 .g-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px 12px;
+  gap: 24px 12px;
 }
 @media (min-width: 600px) {
-  .g-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 16px; }
+  .g-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 16px; }
 }
 @media (min-width: 960px) {
-  .g-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; }
+  .g-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px 24px; }
 }
 
 .g-card {
@@ -118,7 +138,8 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center 30%;
-  background: #e8e4de;
+  background: var(--color-line);
+  transition: opacity .15s ease-out;
 }
 
 .g-card h3 {
@@ -127,24 +148,36 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.6em;
-  margin: 8px 0 2px;
-  font-size: 14px;
+  margin: 10px 0 4px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1.3;
+  transition: color .15s ease-out;
 }
 
 .g-card p {
   display: block;
   overflow: hidden;
   margin: 0;
-  font-size: 12px;
-  color: #666;
-  white-space: nowrap;
+  color: var(--color-ink-soft);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
   text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 @media (min-width: 600px) {
-  .g-card h3 { font-size: 16px; }
-  .g-card p { font-size: 13px; }
+  .g-card h3 { font-size: 17px; }
+  .g-card p { font-size: 11px; }
+}
+
+@media (hover: hover) {
+  .g-card:hover h3 { color: var(--color-accent); }
+  .g-card:hover img { opacity: 0.9; }
 }
 
 /* ---------- Tombol "Muat lebih banyak" ---------- */
@@ -153,16 +186,24 @@
   width: 100%;
   max-width: 280px;
   height: 44px;
-  margin: 32px auto 0;
+  margin: 40px auto 0;
   padding: 0 24px;
-  border: 1px solid var(--teks);
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
   background: transparent;
-  color: var(--teks);
+  color: var(--color-ink);
   font: inherit;
-  font-size: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: color .15s ease-out, border-color .15s ease-out;
 }
 #g-more:disabled { opacity: 0.5; cursor: wait; }
+@media (hover: hover) {
+  #g-more:hover:not(:disabled) { border-color: var(--color-accent); color: var(--color-accent); }
+}
 
 /* ---------- Lightbox ---------- */
 dialog {
@@ -171,12 +212,13 @@ dialog {
   max-height: 94dvh;
   overflow: auto;
   box-sizing: border-box;
-  border: 1px solid #bbb;
+  border: 1px solid var(--color-line);
+  border-radius: 0;
   padding: 12px;
-  background: var(--latar);
-  color: var(--teks);
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
-dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
+dialog::backdrop { background: rgba(31, 28, 25, 0.8); }
 
 #g-box-img {
   display: block;
@@ -184,11 +226,27 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
   max-height: 55vh;
   max-height: 55dvh;
   margin: 0 auto;
-  background: #e8e4de;
+  background: var(--color-line);
 }
-#g-box h2 { margin: 16px 0 4px; font-size: 20px; }
-#g-box-meta { margin: 0 0 8px; font-size: 14px; color: #666; }
-#g-box-desc { margin: 8px 0; white-space: pre-line; }
+
+#g-box h2 { margin: 20px 0 6px; font-size: 22px; }
+
+#g-box-meta {
+  margin: 0 0 12px;
+  color: var(--color-ink-soft);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#g-box-desc {
+  margin: 8px 0;
+  color: var(--color-ink-soft);
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
 
 /* HP: tombol 2x2 */
 .g-box-nav {
@@ -202,18 +260,26 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
   height: 44px;
   margin: 0;
   padding: 0 12px;
-  border: 1px solid var(--teks);
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
   background: transparent;
-  color: var(--teks);
+  color: var(--color-ink);
   font: inherit;
-  font-size: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: color .15s ease-out, border-color .15s ease-out;
 }
 .g-box-nav button:disabled { opacity: 0.4; cursor: default; }
+@media (hover: hover) {
+  .g-box-nav button:hover:not(:disabled) { border-color: var(--color-accent); color: var(--color-accent); }
+}
 
 @media (min-width: 600px) {
   dialog { padding: 16px; }
   #g-box-img { max-height: 65vh; max-height: 65dvh; }
-  #g-box h2 { font-size: 22px; }
+  #g-box h2 { font-size: 24px; }
   .g-box-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
